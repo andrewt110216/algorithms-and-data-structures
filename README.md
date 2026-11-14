@@ -2,6 +2,8 @@
 
 <em>Python files for Algorithms & Data Structures and Leetcode solutions</em>
 
+<em>Migration to new format in process.</em>
+
 ![GitHub Workflow Results - Tests & Linting](https://github.com/andrewt110216/algorithms-and-data-structures/actions/workflows/tests.yml/badge.svg) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 <!-- THESE 3 BADGE VALUES ARE HARD CODED -->
