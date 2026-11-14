@@ -2,12 +2,38 @@
 
 <em>Python files for Algorithms & Data Structures and Leetcode solutions</em>
 
-Each file has a corresponding test file and some files also include examples that run in the file's main method.
-
 ![GitHub Workflow Results - Tests & Linting](https://github.com/andrewt110216/algorithms-and-data-structures/actions/workflows/tests.yml/badge.svg) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 <!-- THESE 3 BADGE VALUES ARE HARD CODED -->
 ![LC Problems](https://img.shields.io/badge/LC%20Problems-34-orange) ![Algorithms](https://img.shields.io/badge/Algorithms-3-red) ![Data Structures](https://img.shields.io/badge/Data%20Structures-4-blue)
+
+# Development
+
+Created with:
+```
+uv venv env --python 3.14
+```
+
+Activate and install deps:
+```
+source env/bin/activate
+uv pip install -e ".[dev]"
+```
+
+Update deps:
+```
+uv pip freeze --exclude-editable --python env/bin/python > requirements.txt
+```
+
+Print test case results for a single problem:
+```
+python -m leetcode.main p0001
+```
+
+Test all cases across all files:
+```
+pytest -v leetcode
+```
 
 ## Algorithms
 
@@ -31,7 +57,7 @@ Each file has a corresponding test file and some files also include examples tha
 
 | Count | LC # | Description | Difficulty |
 | --- | --- | --- | --- |
-| 1 | 1 | [Two Sum](leetcode/p0001_solution.py) | Easy |
+| 1 | 1 | [Two Sum](leetcode/p0001.py) | Easy |
 | 2 | 3 | [Longest Substring Without Repeating Characters](leetcode/p0003_solution.py) | Medium |
 | 3 | 19 | [Remove Nth Node From Linked List](leetcode/p0019_solution.py) | Medium |
 | 4 | 20 | [Valid Parentheses](leetcode/p0020_solution.py) | Easy |

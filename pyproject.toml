@@ -13,10 +13,10 @@ authors = [
     {name = "Andrew Tracey"},
 ]
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.14"
 
 [project.optional-dependencies]
-dev = ["pytest", "black"]
+dev = ["pytest", "black", "pyright"]
 
 [project.urls]
 Homepage = "https://github.com/andrewt110216/algorithms-and-data-structures"
@@ -24,5 +24,12 @@ Homepage = "https://github.com/andrewt110216/algorithms-and-data-structures"
 [tool.black]
 # Set line length to PEP 8 suggested length
 line-length = 79
-target-version = ['py37']
+target-version = ['py314']
 include = '\.pyi?$'
+
+[tool.pyright]
+pythonVersion = "3.14"
+venvPath = "."
+venv = "env"
+typeCheckingMode = "standard"
+include = ["leetcode", "algorithms", "data_structures"]
