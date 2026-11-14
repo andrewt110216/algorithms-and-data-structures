@@ -129,6 +129,7 @@ class Suite:
     """
     Collection of test cases and solver functions to be tested.
     """
+
     # Console output width.
     WIDTH: ClassVar[int] = 79
 

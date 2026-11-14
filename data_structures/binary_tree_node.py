@@ -1,7 +1,6 @@
 import queue
 from collections import deque
 
-
 # Note the following properties of binary trees when represented as lists
 # Let i represent the counting position, starting from 1 (i.e. index + 1),
 # and n represent the length of the list:
