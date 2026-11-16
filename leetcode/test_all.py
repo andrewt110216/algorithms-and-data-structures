@@ -1,4 +1,4 @@
-from leetcode.test_suites import ALL_TEST_SUITES
+from leetcode.registry import TEST_SUITE_REGISTRY
 from leetcode.interfaces import Solver, Case
 
 import pytest
@@ -12,7 +12,7 @@ import pytest
             case,
             id=f"{suite.number} {suite.name} - {solver.name} - {case.name}",
         )
-        for suite in ALL_TEST_SUITES
+        for suite in TEST_SUITE_REGISTRY
         for solver in suite.solvers
         for case in suite.cases
     ],
