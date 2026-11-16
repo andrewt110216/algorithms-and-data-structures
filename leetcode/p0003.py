@@ -49,7 +49,7 @@ cases = [
 ]
 
 
-def sliding_window_optimized(s: str) -> int:
+def sliding_window(s: str) -> int:
     """
     Use a sliding window with two pointers, optimized by saving the highest
     index where each character is found in a dictionary so that the left
@@ -75,13 +75,12 @@ def sliding_window_optimized(s: str) -> int:
     return max_len
 
 
-def sliding_window_check_all(s: str) -> int:
+def brute_force(s: str) -> int:
     """
-    Use a sliding window with two pointers and check each substring of
-    non-repeating characters (storing seen characters in a set), and
-    dynamically update the maximum length.
+    Check each substring of non-repeating characters (storing seen characters
+    in a set), and dynamically update the maximum length.
 
-    Time: O(n!) (at each i we do (n - i) operations for a total n!)
+    Time: O(n^2)
     Space: O(n) (max size of the set)
     """
     n = len(s)
@@ -122,12 +121,12 @@ P0003_TEST_SUITE = Suite(
     name="Longest Substring Without Repeats",
     solvers=[
         Solver(
-            name="Sliding Window Optimized",
-            fn=sliding_window_optimized,
+            name="Sliding Window",
+            fn=sliding_window,
         ),
         Solver(
-            name="Sliding Window Check All",
-            fn=sliding_window_check_all,
+            name="Brute Force",
+            fn=brute_force,
         ),
     ],
     cases=cases,

@@ -26,7 +26,7 @@ class Solver:
 # Input to a solver. Put into a list.
 InputT: TypeAlias = list
 
-# Output of a solver. Generally put outputs in a list.
+# Output of a solver.
 # If solver is expected to raise an error, use ExpectedError subclass instance.
 OutputT: TypeAlias = Any
 
