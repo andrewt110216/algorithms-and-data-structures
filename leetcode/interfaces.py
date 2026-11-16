@@ -2,7 +2,7 @@ import time
 
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Callable, ClassVar, TypeAlias
+from typing import Any, Callable, ClassVar, TypeAlias
 
 
 class ExpectedError(Exception):
@@ -27,8 +27,8 @@ class Solver:
 InputT: TypeAlias = list
 
 # Output of a solver. Generally put outputs in a list.
-# If solver is expected to raise an error, use ExpectedError instance.
-OutputT: TypeAlias = list | ExpectedError | None
+# If solver is expected to raise an error, use ExpectedError subclass instance.
+OutputT: TypeAlias = Any
 
 
 @dataclass(frozen=True)

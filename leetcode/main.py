@@ -1,10 +1,10 @@
 import argparse
 import sys
 
-from leetcode.test_suites import ALL_TEST_SUITES
+from leetcode.registry import TEST_SUITE_REGISTRY
 from leetcode.interfaces import Suite
 
-SUITES_BY_NUMBER: dict[str, Suite] = {x.number: x for x in ALL_TEST_SUITES}
+SUITES_BY_NUMBER: dict[str, Suite] = {x.number: x for x in TEST_SUITE_REGISTRY}
 
 
 def main():
