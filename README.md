@@ -62,7 +62,7 @@ pytest -v leetcode
 | Count | LC # | Migrated | Description | Difficulty |
 | --- | --- | --- | --- | --- |
 | 1 | 1 | ✅ | [Two Sum](leetcode/p0001.py) | Easy |
-| 2 | 3 | ❌ | [Longest Substring Without Repeating Characters](leetcode/p0003_solution.py) | Medium |
+| 2 | 3 | ✅ | [Longest Substring Without Repeating Characters](leetcode/p0003.py) | Medium |
 | 3 | 19 | ❌ |  [Remove Nth Node From Linked List](leetcode/p0019_solution.py) | Medium |
 | 4 | 20 | ❌ |  [Valid Parentheses](leetcode/p0020_solution.py) | Easy |
 | 5 | 21 | ❌ |  [Merge Two Sorted Linked Lists](leetcode/p0021_solution.py) | Easy |
