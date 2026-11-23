@@ -1,12 +1,18 @@
-"""A class to represent a singly-linked list of ListNodes"""
+"""
+Singly-linked list node.
+"""
 
 from __future__ import annotations
 
 
 class ListNode:
-    """Represent a node of a singly-linked list"""
+    """
+    A node of a singly-linked list.
+    """
 
-    def __init__(self, val: int = 0, next: ListNode = None, has_cycle=False):
+    def __init__(
+        self, val: int = 0, next: ListNode | None = None, has_cycle=False
+    ):
         self.val = val
         self.next = next
         self.has_cycle = has_cycle
@@ -25,8 +31,10 @@ class ListNode:
         return ll_to_list(self) == ll_to_list(node2)
 
 
-def list_to_ll(array: list[int]) -> ListNode:
-    """Convert a list to a linked list of ListNodes"""
+def list_to_ll(array: list[int]) -> ListNode | None:
+    """
+    Convert a list to a linked list of ListNodes
+    """
     n = len(array)
     if n == 0:
         return None
@@ -42,7 +50,9 @@ def list_to_ll(array: list[int]) -> ListNode:
 
 
 def ll_to_list(head: ListNode) -> list[int]:
-    """Convert a linked list to a traditional list"""
+    """
+    Convert a linked list to a traditional list
+    """
     array = []
     if head:
         cur = head
