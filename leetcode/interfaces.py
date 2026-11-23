@@ -2,7 +2,7 @@ import time
 
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Any, Callable, ClassVar, TypeAlias
+from typing import Any, Callable, ClassVar, Protocol, TypeAlias
 
 
 class ExpectedError(Exception):
@@ -21,6 +21,9 @@ class NoSolutionError(ExpectedError):
 class Solver:
     name: str
     fn: Callable
+    # Tuple of case names to skip in unit tests, e.g. if they are prohibitively
+    # slow under this solver.
+    skip_cases_in_test: tuple[str, ...] = ()
 
 
 # Input to a solver. Put into a list.
@@ -46,40 +49,52 @@ class Result:
         return out
 
 
-# Callable to check if a solver output matches the case's expected result.
-CheckerT: TypeAlias = Callable[[OutputT, OutputT], bool]
-
-# Stock checkers.
-
-
-def check_eq(actual: OutputT, expected: OutputT) -> bool:
+class Checker(Protocol):
     """
-    Simple equality checker.
+    Checks if a solver output matches the Case's expected result.
     """
-    return actual == expected
+
+    def check(self, actual: OutputT, expected: OutputT) -> bool: ...
 
 
-def check_unordered(actual: OutputT, expected: OutputT) -> bool:
-    """
-    Order of the top-level list does not matter; order within each element
-    does. E.g. permutations: [[1, 2], [2, 1]] == [[2, 1], [1, 2]].
-    """
-    if not isinstance(actual, list) or not isinstance(expected, list):
-        return False
-    return sorted(actual) == sorted(expected)
+class Equal(Checker):
+
+    def check(self, actual: OutputT, expected: OutputT) -> bool:
+        """
+        Simple equality checker (order matters).
+        """
+        return actual == expected
 
 
-def check_unordered_nested(actual: OutputT, expected: OutputT) -> bool:
-    """
-    Order matters at neither the top level nor within each (list) element.
-    E.g. combinations: [[1, 2], [3, 1]] == [[1, 3], [2, 1]].
-    """
-    if not isinstance(actual, list) or not isinstance(expected, list):
-        return False
-    return check_unordered(
-        [sorted(x) for x in actual],
-        [sorted(x) for x in expected],
-    )
+class Unordered(Checker):
+
+    def check(self, actual: OutputT, expected: OutputT) -> bool:
+        """
+        Order of the top-level list does not matter; order within each element
+        does. E.g. permutations: [[1, 2], [2, 1]] == [[2, 1], [1, 2]].
+        """
+        if not isinstance(actual, list) or not isinstance(expected, list):
+            return False
+        return sorted(actual) == sorted(expected)
+
+
+class UnorderedNested(Checker):
+
+    def check(self, actual: OutputT, expected: OutputT) -> bool:
+        """
+        Order matters at neither the top level nor within each (list) element.
+        E.g. combinations: [[1, 2], [3, 1]] == [[1, 3], [2, 1]].
+        """
+        if not isinstance(actual, list) or not isinstance(expected, list):
+            return False
+        return Unordered().check(
+            [sorted(x) for x in actual],
+            [sorted(x) for x in expected],
+        )
+
+
+# Default checker.
+EQUAL = Equal()
 
 
 @dataclass(frozen=True)
@@ -95,7 +110,7 @@ class Case:
     # Expected output.
     expected: OutputT
     # Checker to compare expected to solver result.
-    checker: CheckerT = check_eq
+    checker: Checker = EQUAL
 
     def evaluate(self, solver: Solver) -> Result:
         start = time.perf_counter()
@@ -115,8 +130,9 @@ class Case:
             )
 
         expected = deepcopy(self.expected)
+        checker = self.checker or Equal()
         return Result(
-            passed=self.checker(actual, expected),
+            passed=checker.check(actual, expected),
             actual=actual,
             expected=self.expected,
             error=None,

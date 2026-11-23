@@ -15,6 +15,7 @@ import pytest
         for suite in TEST_SUITE_REGISTRY
         for solver in suite.solvers
         for case in suite.cases
+        if case.name not in solver.skip_cases_in_test
     ],
 )
 def test(solver: Solver, case: Case):

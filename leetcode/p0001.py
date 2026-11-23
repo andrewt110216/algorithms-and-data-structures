@@ -70,7 +70,10 @@ def two_sum_brute(nums: list[int], target: int) -> list[int]:
 P0001_TEST_SUITE = Suite(
     number="p0001",
     name="Two Sum",
-    solvers=[Solver("Hash Map", two_sum_hash_map)],
+    solvers=[
+        Solver("Hash Map", two_sum_hash_map),
+        Solver("Brute Force", two_sum_brute, ("Large Input",)),
+    ],
     cases=cases,
 )
 
