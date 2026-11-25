@@ -41,20 +41,20 @@ pytest -v leetcode
 
 ## Algorithms
 
-| Count | Migrated | Algorithm |
-| --- | --- | --- |
-| 1 | ❌ | [QuickSort](algorithms/quick_sort.py) |
-| 2 | ❌ | [MergeSort](algorithms/merge_sort.py) |
-| 3 | ❌ | [Kosaraju](algorithms/kosaraju.py) |
+| Count | Algorithm |
+| --- | --- |
+| 1 | [QuickSort](algorithms/quick_sort.py) |
+| 2 | [MergeSort](algorithms/merge_sort.py) |
+| 3 | [Kosaraju](algorithms/kosaraju.py) |
 
 ## Data Structures
 
-| Count | Migrated | Data Structure |
-| --- | --- | --- |
-| 1 | ❌ | [Linked List](data_structures/linked_list.py) |
-| 2 | ❌ | [Binary Tree](data_structures/binary_tree_node.py) |
-| 3 | ❌ | [Heap](data_structures/heap.py) |
-| 4 | ❌ | [LRU Cache](data_structures/lru_cache.py)
+| Count | Data Structure |
+| --- | --- |
+| 1 | [Linked List](data_structures/linked_list.py) |
+| 2 | [Binary Tree](data_structures/binary_tree_node.py) |
+| 3 | [Heap](data_structures/heap.py) |
+| 4 | [LRU Cache](data_structures/lru_cache.py)
 
 
 ## Leetcode
