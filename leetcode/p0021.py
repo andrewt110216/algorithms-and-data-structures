@@ -80,7 +80,9 @@ def recursive(l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
     return recurse(l1, l2)
 
 
-def recurse_in_place(l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
+def recurse_in_place(
+    l1: ListNode | None, l2: ListNode | None
+) -> ListNode | None:
     """
     Make l1 into the merged list by splicing l2 into it recursively.
 
