@@ -31,7 +31,7 @@ uv pip freeze --exclude-editable --python env/bin/python > requirements.txt
 
 Print test case results for a single problem:
 ```
-python -m leetcode.main p0001
+python3 -m leetcode.main p0001
 ```
 
 Test all cases across all files:
