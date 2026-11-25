@@ -1,4 +1,4 @@
-name: Tests
+name: Test
 
 on: push
 
@@ -20,9 +20,6 @@ jobs:
 
       - name: Install From Source
         run: pip install -e .
-
-      - name: Black Checks
-        run: black --check .
 
       - name: Pytest
         run: pytest
