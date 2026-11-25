@@ -18,11 +18,10 @@ class ListNode:
         self.has_cycle = has_cycle
 
     def __repr__(self):
-        val = self.next.val if self.next else "None"
-        return f"<ListNode {self.val} -> " f"({val})>"
+        return f"<LinkedList: {repr(ll_to_list(self))}>"
 
     def __str__(self):
-        return self.__repr__()
+        return repr(self)
 
     def __eq__(self, node2):
         """Two ListNodes are equal if their list representations are equal"""

@@ -65,7 +65,7 @@ pytest -v leetcode
 | 2 | 3 | ✅ | [Longest Substring Without Repeating Characters](leetcode/p0003.py) | Medium |
 | 3 | 19 | ✅ |  [Remove Nth Node From Linked List](leetcode/p0019.py) | Medium |
 | 4 | 20 | ✅ |  [Valid Parentheses](leetcode/p0020.py) | Easy |
-| 5 | 21 | ❌ |  [Merge Two Sorted Linked Lists](leetcode/p0021_solution.py) | Easy |
+| 5 | 21 | ✅ |  [Merge Two Sorted Linked Lists](leetcode/p0021.py) | Easy |
 | 6 | 34 | ❌ |  [Find First and Last Position of Element in Sorted Array](leetcode/p0034_solution.py) | Medium |
 | 7 | 46 | ❌ | [Permutations](leetcode/p0046_solution.py) | Medium |
 | 8 | 53 | ❌ | [Maximum Subarray](leetcode/p0053_solution.py) | Medium |
