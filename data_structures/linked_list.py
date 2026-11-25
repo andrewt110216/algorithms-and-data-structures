@@ -6,10 +6,28 @@ operations, including insert, delete, search, and sort
 from __future__ import annotations
 from data_structures.linked_list_node import ListNode
 from functools import wraps
+from typing import Callable, Concatenate
 
 
 class CycleException(Exception):
     pass
+
+
+def _no_cycle[**P, R](
+    f: Callable[Concatenate[LinkedList, P], R],
+) -> Callable[Concatenate[LinkedList, P], R]:
+    """
+    Raise CycleException instead of running f on a list with a cycle.
+    """
+
+    @wraps(f)
+    def wrapped(self: LinkedList, *args: P.args, **kwargs: P.kwargs) -> R:
+        if self.has_cycle():
+            msg = f'Cannot run "{f.__name__}" on a list with a cycle'
+            raise CycleException(msg)
+        return f(self, *args, **kwargs)
+
+    return wrapped
 
 
 class LinkedList:
@@ -26,16 +44,6 @@ class LinkedList:
         self._length = 0
         if node_values:
             self.from_array(node_values)
-
-    def _no_cycle(f):
-        @wraps(f)
-        def wrapped(self, *args, **kwargs):
-            if self.has_cycle():
-                msg = f'Cannot run "{f.__name__}" on a list with a cycle'
-                raise CycleException(msg)
-            return f(self, *args, **kwargs)
-
-        return wrapped
 
     @_no_cycle
     def __len__(self):

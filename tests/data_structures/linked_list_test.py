@@ -17,18 +17,18 @@ class TestNode:
         node = ListNode()
         assert node.val == 0
         assert node.next is None
-        assert str(node) == repr(node) == "<ListNode 0 -> (None)>"
+        assert str(node) == repr(node) == "<LinkedList: [0]>"
 
     def test_update_value(self, new_node):
         new_node.val = 10
         assert new_node.val == 10
-        assert str(new_node) == "<ListNode 10 -> (None)>"
+        assert str(new_node) == "<LinkedList: [10]>"
 
     def test_add_next(self, new_node):
         new_node.val = 10
         new_node.next = ListNode(1)
-        assert str(new_node) == "<ListNode 10 -> (1)>"
-        assert str(new_node.next) == "<ListNode 1 -> (None)>"
+        assert str(new_node) == "<LinkedList: [10, 1]>"
+        assert str(new_node.next) == "<LinkedList: [1]>"
 
 
 class TestLinkedList:
