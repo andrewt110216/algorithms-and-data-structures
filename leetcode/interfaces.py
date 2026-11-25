@@ -1,3 +1,5 @@
+import os
+import sys
 import time
 
 from copy import deepcopy
@@ -176,23 +178,56 @@ class Suite:
                 except Exception as e:
                     # Unexpected exception: report it and keep going.
                     failed += 1
-                    print(f"  {solver.name}: ERROR")
+                    print(f"  {solver.name}: {_color("ERROR", _RED)}")
                     print(f"    {e!r}")
                     continue
 
                 if not result.passed:
                     failed += 1
-                status = "PASS" if result.passed else "FAIL"
-                ms = result.elapsed_s * 1000
-                print(f"  {solver.name}: {status} ({ms:.3f} ms)")
+                print(f"  {solver.name}:")
                 output = result.error if result.error else result.actual
                 print(f"    Output: {_truncate(output)}")
+                status = _status(result.passed)
+                ms = result.elapsed_s * 1000
+                print(f"    {status} ({ms:.3f} ms)")
 
         print()
         print(" Summary ".center(self.WIDTH, "="))
-        verdict = "PASS" if failed == 0 else "FAIL"
+        verdict = _status(failed == 0)
         print(f"{total} run, {failed} failed: {verdict}")
         return failed == 0
+
+
+_GREEN = "\033[32m"
+_RED = "\033[31m"
+_RESET = "\033[0m"
+
+
+def _use_color() -> bool:
+    """
+    True if stdout is an interactive terminal and the user hasn't opted out.
+    """
+    if os.environ.get("NO_COLOR"):
+        return False
+    if os.environ.get("FORCE_COLOR"):
+        return True
+    return sys.stdout.isatty()
+
+
+def _color(text: str, code: str) -> str:
+    """
+    Wrap text in an ANSI color code, if color output is enabled.
+    """
+    if not _use_color():
+        return text
+    return f"{code}{text}{_RESET}"
+
+
+def _status(passed: bool) -> str:
+    """
+    "PASS" in green or "FAIL" in red.
+    """
+    return _color("PASS", _GREEN) if passed else _color("FAIL", _RED)
 
 
 def _truncate(value: object, max_len: int = 60) -> str:
