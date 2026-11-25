@@ -25,6 +25,11 @@ cases = [
         inputs=list(map(list_to_ll, [[-2, 0, 1, 4, 4], [-8, -2, -1, 0, 3]])),
         expected=list_to_ll([-8, -2, -2, -1, 0, 0, 1, 3, 4, 4]),
     ),
+    Case(
+        name="L1 Strictly Greater than L2",
+        inputs=list(map(list_to_ll, [[4, 5, 6], [1, 2, 3]])),
+        expected=list_to_ll([1, 2, 3, 4, 5, 6]),
+    ),
 ]
 
 
@@ -73,6 +78,34 @@ def recursive(l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
         return head
 
     return recurse(l1, l2)
+
+
+def recurse_in_place(l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
+    """
+    Make l1 into the merged list by splicing l2 into it recursively.
+
+    Time: O(n + m)
+    Space: O(1)
+    """
+    # Base Case.
+    if l1 is None:
+        return l2
+    if l2 is None:
+        return l1
+
+    # l1 is our pointer for the merged list. If l2 is smaller, then promote it
+    # to l1 by swapping the pointers.
+    if l1.val > l2.val:
+        tmp = l1
+        l1 = l2
+        l2 = tmp
+        del tmp
+
+    # Recurse on l1.
+    l1.next = recurse_in_place(l1.next, l2)
+
+    # l1 is now the merged list.
+    return l1
 
 
 def iterative(l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
@@ -131,6 +164,7 @@ P0021_TEST_SUITE = Suite(
     name="Merge Linked Lists",
     solvers=[
         Solver(name="Recursive", fn=recursive),
+        Solver(name="Recursive - In Place", fn=recurse_in_place),
         Solver(name="Iterative", fn=iterative),
     ],
     cases=cases,
